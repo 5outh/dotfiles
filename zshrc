@@ -5,6 +5,11 @@ export ZSH="$HOME/.zsh/"
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
 
+# Load super secret stuff
+if [ -f "$HOME/.local/secrets" ]; then
+    source "$HOME/.local/secrets"
+fi
+
 # # load the path files
 for file in ${(M)config_files:#*/path.zsh}
 do
@@ -37,10 +42,10 @@ export TERM=xterm-256color
 source $HOME/.git-aliases
 
 export FRONTROW_PATH="$HOME/projects/frontrow/megarepo/"
-export PATH="$HOME/.yarn/bin:/$HOME/.local/bin:$HOME/.screenlayout/:/usr/local/pgsql/bin:./node_modules/.bin:~/.yarn/bin/:~/.dotfiles/bin:/opt/ghc/bin:$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:./dist"
+export PATH="$HOME/.local/bin/mine:$HOME/.git/bin:$HOME/.yarn/bin:/$HOME/.local/bin:$HOME/.screenlayout/:/usr/local/pgsql/bin:./node_modules/.bin:~/.yarn/bin/:~/.dotfiles/bin:/opt/ghc/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:./dist:$PATH"
 
 # Fast GHC Options for Stack
-export FAST_GHC_OPTIONS='-fobject-code -j +RTS -A128m -n2m -RTS'
+export GHC_OPTIONS='-fprint-unicode-syntax -fmax-relevant-binds=3 -fdiagnostics-color=always -fprint-expanded-synonyms -freverse-errors -fobject-code -j +RTS -A128m -n2m -RTS'
 
 precmd() {
   RPROMPT=""
@@ -73,38 +78,7 @@ bindkey '^R' history-incremental-search-backward
 GPG_TTY=$(tty)
 export GPG_TTY
 
-stack-test() {
-  if [ $# -eq 0 ]; then
-    stack test $(basename $(pwd)) \
-      --fast \
-      --pedantic \
-      --file-watch \
-      --ghc-options="$FAST_GHC_OPTIONS" \
-      --interleaved-output \
-      "$@"
-  else
-    stack test $(basename $(pwd)) \
-      --fast \
-      --pedantic \
-      --test-arguments="-m \"$1\"" \
-      --file-watch \
-      --ghc-options="$FAST_GHC_OPTIONS" \
-      --interleaved-output \
-      "${@:2}"
-  fi
-}
-
 MEGAREPO_ROOT="/home/ubuntu/code/fr/megarepo/"
-
-# Change Worktree
-cw() {
-  if [[ $# == 0 ]];
-  then
-    cd "$MEGAREPO_ROOT"
-  else
-    cd "$MEGAREPO_ROOT/.worktrees/$1"
-  fi
-}
 
 # List Worktree
 alias lw="git worktree list"
@@ -115,3 +89,6 @@ eval "$(hub alias -s)"
 # Add 'hub' completions
 fpath=(~/.zsh/completions $fpath)
 autoload -U compinit && compinit
+
+# Add kitchen sink functions
+source "$ZSH/functions.zsh"

@@ -228,8 +228,13 @@ function! SearchHoogleWord ()
   let wordUnderCursor = expand("<cword>")
   :silent exec "! sensible-browser \"https://www.stackage.org/lts-14.16/hoogle?q=" . wordUnderCursor . "\""
 endfunction
-
 nmap <Leader>! :call SearchHoogleWord()<CR>
+
+" Open this configuration, useful for looking up commands and adding useful
+" things on the fly.
+function Config ()
+  exec ":edit ~/.config/nvim/init.vim"
+endfunction
 
 " Numbered Windows
 let i = 1
@@ -248,10 +253,13 @@ nmap <Leader>gc :Git commit --verbose<CR>
 nmap <Leader>gp :Git push origin HEAD<CR>
 nmap <Leader>gP :Git push origin HEAD --force<CR>
 
+" Browse modified git files
+nmap <Leader>gf :GitFiles -m<CR>
+
 " Refresh current branch from 'master'
 nmap <Leader>gR :Git fetch master<CR>:Git rebase master<CR>
 
 " Copy short filename to clipboard
-nmap <LEADER>CS :let @+=expand("%")<CR>
+nmap <leader>CS :let @+=expand("%")<CR>
 " Copy full (long) filename to clipboard (full path)
-nmap <LEADER>CL :let @+=expand("%:p")<CR>
+nmap <leader>CL :let @+=expand("%:p")<CR>
