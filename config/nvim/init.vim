@@ -13,7 +13,6 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'SirVer/ultisnips'
 Plug '5outh/yesod-routes.vim'
-Plug 'ElmCast/elm-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
@@ -262,4 +261,20 @@ nmap <Leader>gR :Git fetch master<CR>:Git rebase master<CR>
 " Copy short filename to clipboard
 nmap <leader>CS :let @+=expand("%")<CR>
 " Copy full (long) filename to clipboard (full path)
-nmap <leader>CL :let @+=expand("%:p")<CR>
+nmap <LEADER>CL :let @+=expand("%:p")<CR>
+
+" UltiSnips Configuration
+
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger='<tab>'
+
+" shortcut to go to next position
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+
+" shortcut to go to previous position
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+
+" Points to ~/.config/nvim/snippets in `runtimepath`
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "usnippets"]
+>>>>>>> Add ultisnips config
