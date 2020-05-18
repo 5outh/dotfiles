@@ -34,6 +34,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'scrooloose/nerdcommenter'
 Plug 'skywind3000/vim-preview'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
@@ -71,6 +72,7 @@ let g:ale_haskell_brittany_executable='stack'
 let g:ale_haskell_stylish_haskell_executable='stack'
 
 let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_javascript_eslint_use_local_config = 1
 
 let g:ale_fix_on_save = 1
 
@@ -249,7 +251,8 @@ autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 " Git bindings
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>ga :Git add %<CR>
-nmap <Leader>gc :Git commit --verbose<CR>
+nmap <Leader>gc :tabnew<CR>:Git commit --verbose<CR>
+nmap <Leader>gC :tabnew<CR>:Git commit --verbose --amend<CR>
 nmap <Leader>gp :Git push origin HEAD<CR>
 nmap <Leader>gP :Git push origin HEAD --force<CR>
 

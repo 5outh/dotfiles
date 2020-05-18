@@ -45,7 +45,7 @@ export FRONTROW_PATH="$HOME/projects/frontrow/megarepo/"
 export PATH="$HOME/.local/bin/mine:$HOME/.git/bin:$HOME/.yarn/bin:/$HOME/.local/bin:$HOME/.screenlayout/:/usr/local/pgsql/bin:./node_modules/.bin:~/.yarn/bin/:~/.dotfiles/bin:/opt/ghc/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:./dist:$PATH"
 
 # Fast GHC Options for Stack
-export GHC_OPTIONS='-fprint-unicode-syntax -fmax-relevant-binds=3 -fdiagnostics-color=always -fprint-expanded-synonyms -freverse-errors -fobject-code -j +RTS -A128m -n2m -RTS'
+export GHC_OPTIONS='-fmax-relevant-binds=3 -fdiagnostics-color=always -fprint-expanded-synonyms -freverse-errors -fobject-code -j +RTS -A128m -n2m -RTS'
 
 precmd() {
   RPROMPT=""
@@ -85,6 +85,10 @@ alias lw="git worktree list"
 
 # Use 'hub' alias for 'git'
 eval "$(hub alias -s)"
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # Add 'hub' completions
 fpath=(~/.zsh/completions $fpath)
