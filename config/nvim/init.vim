@@ -259,8 +259,8 @@ nmap <Leader>gP :Git push origin HEAD --force<CR>
 " Browse modified git files
 nmap <Leader>gf :GitFiles -m<CR>
 
-" Refresh current branch from 'master'
-nmap <Leader>gR :Git fetch master<CR>:Git rebase master<CR>
+" Refresh current branch from 'main'
+nmap <Leader>gR :Git fetch main<CR>:Git rebase main<CR>
 
 " Copy short filename to clipboard
 nmap <leader>CS :let @+=expand("%")<CR>
