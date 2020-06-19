@@ -7,24 +7,25 @@ endfunction
 
 call plug#begin()
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ervandew/supertab'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'SirVer/ultisnips'
 Plug '5outh/yesod-routes.vim'
 Plug 'ElmCast/elm-vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
+Plug 'autozimu/LanguageClient-neovim'
+Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/supertab'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'haya14busa/incsearch.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-arpeggio'
 Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
 Plug 'mtth/scratch.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mxw/vim-jsx'
@@ -34,6 +35,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'scrooloose/nerdcommenter'
 Plug 'skywind3000/vim-preview'
+Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -43,7 +45,6 @@ Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
-Plug 'dense-analysis/ale'
 
 call plug#end()
 
