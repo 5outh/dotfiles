@@ -14,7 +14,10 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
-Plug 'autozimu/LanguageClient-neovim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
@@ -76,6 +79,11 @@ let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_eslint_use_local_config = 1
 
 let g:ale_fix_on_save = 1
+
+let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
+let g:LanguageClient_serverCommands = {
+    \ 'haskell': ['stack', 'exec -- ghcide --lsp'],
+    \ }
 
 " Force spaces before comment delimeters
 let g:NERDSpaceDelims = 1
@@ -267,3 +275,9 @@ nmap <Leader>gR :Git fetch main<CR>:Git rebase main<CR>
 nmap <leader>CS :let @+=expand("%")<CR>
 " Copy full (long) filename to clipboard (full path)
 nmap <leader>CL :let @+=expand("%:p")<CR>
+
+" LanguageServer bindings
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
