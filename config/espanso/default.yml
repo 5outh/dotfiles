@@ -44,3 +44,9 @@ matches:
         type: match
         params:
           trigger: "/tomorrow"
+
+  - trigger: "/link"
+    replace: "[$|$]({{link}})"
+    vars:
+      - name: link
+        type: clipboard
