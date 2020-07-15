@@ -28,17 +28,12 @@ matches:
           format: "%B %e, %Y"
 
   - trigger: "/crumbs"
-    replace: "< {{yesterday}} | {{today}} | {{tomorrow}} >"
+    replace: "< {{yesterday}} | {{tomorrow}} >"
     vars:
       - name: yesterday
         type: match
         params:
           trigger: "/yesterday"
-
-      - name: today
-        type: match
-        params:
-          trigger: "/today"
 
       - name: tomorrow
         type: match
