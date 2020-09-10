@@ -42,7 +42,7 @@ export TERM=xterm-256color
 source $HOME/.git-aliases
 
 export FRONTROW_PATH="$HOME/projects/frontrow/megarepo/"
-export PATH="$HOME/.local/bin/mine:$HOME/.git/bin:$HOME/.yarn/bin:/$HOME/.local/bin:$HOME/.screenlayout/:/usr/local/pgsql/bin:./node_modules/.bin:~/.yarn/bin/:~/.dotfiles/bin:/opt/ghc/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:./dist:$PATH"
+export PATH="$HOME/.local/bin/kitty.app/bin/:$HOME/.git/bin:$HOME/.yarn/bin:/$HOME/.local/bin:$HOME/.screenlayout/:/usr/local/pgsql/bin:./node_modules/.bin:~/.yarn/bin/:~/.dotfiles/bin:/opt/ghc/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:./dist:$PATH"
 
 # Fast GHC Options for Stack
 export GHC_OPTIONS='-fmax-relevant-binds=3 -fdiagnostics-color=always -fprint-expanded-synonyms -freverse-errors -fobject-code -j +RTS -A128m -n2m -RTS'
@@ -96,3 +96,7 @@ autoload -U compinit && compinit
 
 # Add kitchen sink functions
 source "$ZSH/functions.zsh"
+if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

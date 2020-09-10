@@ -15,7 +15,7 @@ matches:
       - name: output
         type: shell
         params:
-          cmd: "date --date=\"yesterday\" +\"%B, %e, %Y\""
+          cmd: "date --date=\"yesterday\" +\"%B %e, %Y\""
           format: "%B %e, %Y"
 
   - trigger: "/tomorrow"
@@ -24,7 +24,7 @@ matches:
       - name: output
         type: shell
         params:
-          cmd: "date --date=\"next day\" +\"%B, %e, %Y\""
+          cmd: "date --date=\"next day\" +\"%B %e, %Y\""
           format: "%B %e, %Y"
 
   - trigger: "/crumbs"

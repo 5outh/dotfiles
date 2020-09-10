@@ -6,18 +6,13 @@ function! DoRemote(arg)
 endfunction
 
 call plug#begin()
-
+Plug 'ayu-theme/ayu-vim' " or other package manager
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug '5outh/yesod-routes.vim'
 Plug 'ElmCast/elm-vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
@@ -55,7 +50,7 @@ set mouse=a
 set encoding=utf-8
 set list
 
-let g:fzf_layout = { 'window': '10new' }
+let g:fzf_layout = { 'window': '-tabnew' }
 
 let g:deoplete#enable_at_startup = 1
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "usnippets"]
@@ -74,6 +69,7 @@ let g:ale_fixers['json'] = ['prettier']
 let g:ale_haskell_hlint_executable='stack'
 let g:ale_haskell_brittany_executable='stack'
 let g:ale_haskell_stylish_haskell_executable='stack'
+let g:ale_haskell_stack_build_options="--test --fast --file-watch --pedantic --interleaved-output --ghc-options=$GHC_OPTIONS"
 
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_eslint_use_local_config = 1
@@ -97,18 +93,12 @@ let g:jsx_ext_required = 0
 " Enable highlighting of 'forall'
 let g:haskell_enable_quantification = 1
 
-"Colors etc
+"Color Scheme etc
 
-colorscheme onedark
-set background=dark
+set termguicolors     " enable true colors support
+let ayucolor="mirage"
+colorscheme ayu
 set t_Co=256
-
-" set true colors
-if has("termguicolors")
-    set t_8f=\[[38;2;%lu;%lu;%lum
-    set t_8b=\[[48;2;%lu;%lu;%lum
-    set termguicolors
-endif
 
 set colorcolumn=80,120
 
@@ -194,6 +184,9 @@ nnoremap <Leader>vt :vsplit<CR><C-w><C-w>:term<CR>
 " Fuzzy file search
 nnoremap <Leader>e :FZF<cr>
 
+" File history
+nnoremap <Leader>h :History<cr>
+
 " Window cycle
 map <Leader>w <C-w><C-w>
 
@@ -276,8 +269,20 @@ nmap <leader>CS :let @+=expand("%")<CR>
 " Copy full (long) filename to clipboard (full path)
 nmap <leader>CL :let @+=expand("%:p")<CR>
 
-" LanguageServer bindings
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <Leader>a  :<C-u>CocList diagnostics<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <Leader>o  :<C-u>CocList outline<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <Leader>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <Leader>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <Leader>p  :<C-u>CocListResume<CR>
 
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+"Jump to definition
+nmap <silent> gd <Plug>(coc-definition)
+
+" Allow comments in json
+autocmd FileType json syntax match Comment +\/\/.\+$+
