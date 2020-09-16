@@ -280,4 +280,3 @@ let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
 " Points to ~/.config/nvim/snippets in `runtimepath`
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "usnippets"]
->>>>>>> Add ultisnips config
