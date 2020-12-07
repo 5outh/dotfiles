@@ -95,8 +95,8 @@ let g:haskell_enable_quantification = 1
 
 "Color Scheme etc
 
-set termguicolors     " enable true colors support
-let ayucolor="mirage"
+set termguicolors
+let ayucolor="dark"
 colorscheme ayu
 set t_Co=256
 
@@ -167,7 +167,7 @@ set scrolloff=5
 set nofoldenable
 
 " markdown languages
-let g:markdown_fenced_languages = ['java', 'haskell', 'javascript', 'ruby', 'c', 'cpp', 'php']
+let g:markdown_fenced_languages = ['java', 'haskell', 'javascript', 'ruby', 'c', 'cpp', 'php', 'sh']
 
 " incsearch.vim
 map / <Plug>(incsearch-forward)
@@ -253,8 +253,8 @@ autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 " Git bindings
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>ga :Git add %<CR>
-nmap <Leader>gc :tabnew<CR>:Git commit --verbose<CR>
-nmap <Leader>gC :tabnew<CR>:Git commit --verbose --amend<CR>
+nmap <Leader>gc :tab Git commit --verbose<CR>
+nmap <Leader>gC :tab Git commit --verbose --amend<CR>
 nmap <Leader>gp :Git push origin HEAD<CR>
 nmap <Leader>gP :Git push origin HEAD --force<CR>
 

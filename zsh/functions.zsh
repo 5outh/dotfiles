@@ -56,7 +56,7 @@ run-qa-test() {
 stack-test() {
   if [ $# -eq 0 ]; then
     PGDATABASE=classroom_test \
-      stack test $(basename $(pwd)) \
+      stack test $(basename $(pwd)):spec \
       --fast \
       --file-watch \
       --pedantic \
@@ -64,7 +64,7 @@ stack-test() {
       --ghc-options="$GHC_OPTIONS"
   else
     PGDATABASE=classroom_test \
-      stack test $(basename $(pwd)) \
+      stack test $(basename $(pwd)):spec \
       --fast \
       --test-arguments="-m \"$1\"" \
       --file-watch \
