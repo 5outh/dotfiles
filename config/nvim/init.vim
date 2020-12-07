@@ -6,42 +6,30 @@ function! DoRemote(arg)
 endfunction
 
 call plug#begin()
-Plug 'ayu-theme/ayu-vim' " or other package manager
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ayu-theme/ayu-vim'
 Plug '5outh/yesod-routes.vim'
-Plug 'ElmCast/elm-vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'ervandew/supertab'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
 Plug 'haya14busa/incsearch.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-arpeggio'
 Plug 'mileszs/ack.vim'
-Plug 'morhetz/gruvbox'
-Plug 'mtth/scratch.vim'
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'mxw/vim-jsx'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'scrooloose/nerdcommenter'
-Plug 'skywind3000/vim-preview'
-Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-rhubarb' " Needed for :Gbrowse
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 
 call plug#end()
@@ -52,8 +40,8 @@ set list
 
 let g:fzf_layout = { 'window': '-tabnew' }
 
-let g:deoplete#enable_at_startup = 1
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "usnippets"]
+let g:deoplete#enable_at_startup = 0
+let g:UltiSnipsSnippetDirectories=["usnippets"]
 
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['prettier', 'eslint']
@@ -150,7 +138,7 @@ highlight CursorLineNr term=bold cterm=none ctermfg=DarkGreen ctermbg=NONE
 
 " Default indentation:
 set autoindent
-set smartindent
+set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
@@ -167,7 +155,7 @@ set scrolloff=5
 set nofoldenable
 
 " markdown languages
-let g:markdown_fenced_languages = ['java', 'haskell', 'javascript', 'ruby', 'c', 'cpp', 'php', 'sh']
+let g:markdown_fenced_languages = ['java', 'haskell', 'javascript', 'ruby', 'c', 'cpp', 'php', 'sh', 'sql']
 
 " incsearch.vim
 map / <Plug>(incsearch-forward)
