@@ -6,32 +6,32 @@ function! DoRemote(arg)
 endfunction
 
 call plug#begin()
-Plug 'ayu-theme/ayu-vim'
-Plug '5outh/yesod-routes.vim'
-Plug 'SirVer/ultisnips'
-Plug 'airblade/vim-gitgutter'
-Plug 'dense-analysis/ale'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'haya14busa/incsearch.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'kana/vim-arpeggio'
-Plug 'mileszs/ack.vim'
-Plug 'mxw/vim-jsx'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'pbrisbin/vim-syntax-shakespeare'
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb' " Needed for :Gbrowse
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-rhubarb' " Needed for :Gbrowse
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-abolish'
+Plug 'scrooloose/nerdcommenter'
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'pangloss/vim-javascript'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'mxw/vim-jsx'
+Plug 'mileszs/ack.vim'
+Plug 'kana/vim-arpeggio'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'haya14busa/incsearch.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'dense-analysis/ale'
+Plug 'ayu-theme/ayu-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'SirVer/ultisnips'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug '5outh/yesod-routes.vim'
 call plug#end()
 
 set mouse=a
@@ -184,24 +184,6 @@ nnoremap <C-k> :PreviewClose<CR>
 
 set ruler
 
-let g:haskell_classic_highlighting = 1
-let g:haskell_enable_quantification = 1
-let g:haskell_indent_case = 5
-let g:haskell_indent_disable = 1
-let g:haskell_indent_do = 3
-let g:haskell_indent_guard = 4
-let g:haskell_indent_if = 3
-let g:haskell_indent_in = 1
-let g:haskell_indent_let = 4
-let g:haskell_tabular = 1
-
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-
-nnoremap <A-t> :terminal<CR>
-
 " Map jk to esc (chord)
 call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
@@ -215,12 +197,6 @@ autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursor
 " This binding temporarily modifies iskeyword just for the ^] command.
 nnoremap <silent> <c-]> :setl iskeyword=@,_,.,48-57,39<cr><c-]>
     \:setl iskeyword=@,48-57,_,192-255<cr>
-
-function! SearchHoogleWord ()
-  let wordUnderCursor = expand("<cword>")
-  :silent exec "! sensible-browser \"https://www.stackage.org/lts-14.16/hoogle?q=" . wordUnderCursor . "\""
-endfunction
-nmap <Leader>! :call SearchHoogleWord()<CR>
 
 " Open this configuration, useful for looking up commands and adding useful
 " things on the fly.
@@ -251,26 +227,6 @@ nmap <Leader>gf :GitFiles -m<CR>
 
 " Refresh current branch from 'main'
 nmap <Leader>gR :Git fetch main<CR>:Git rebase main<CR>
-
-" Copy short filename to clipboard
-nmap <leader>CS :let @+=expand("%")<CR>
-" Copy full (long) filename to clipboard (full path)
-nmap <leader>CL :let @+=expand("%:p")<CR>
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <Leader>a  :<C-u>CocList diagnostics<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <Leader>o  :<C-u>CocList outline<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <Leader>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <Leader>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <Leader>p  :<C-u>CocListResume<CR>
-
-"Jump to definition
-nmap <silent> gd <Plug>(coc-definition)
 
 " Allow comments in json
 autocmd FileType json syntax match Comment +\/\/.\+$+
