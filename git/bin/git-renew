@@ -1,0 +1,4 @@
+#! /bin/zsh
+
+git checkout master
+git pull -r origin master

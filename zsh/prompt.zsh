@@ -13,6 +13,15 @@ git_branch() {
   echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
 
+in_nix_shell() {
+  if [[ $IN_NIX_SHELL ]]
+  then
+    echo "%{$fg_bold[green]%}[nix]%{$reset_color%}"
+  else
+    echo ""
+  fi
+}
+
 git_dirty() {
   if $(! $git status -s &> /dev/null)
   then
@@ -50,7 +59,7 @@ directory_name() {
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(directory_name) $(git_dirty)$(need_push)\n› '
+export PROMPT=$'\n$(in_nix_shell) $(directory_name) $(git_dirty)$(need_push)\n› '
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
 }

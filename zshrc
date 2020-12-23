@@ -41,10 +41,8 @@ export TERM=xterm-256color
 # Source git aliases again, because the `git` plugin overwrites aliases
 source $HOME/.git-aliases
 
-export FRONTROW_PATH="$HOME/projects/frontrow/megarepo/"
-
 # Fast GHC Options for Stack
-export GHC_OPTIONS='-fmax-relevant-binds=3 -fdiagnostics-color=always -fprint-expanded-synonyms -freverse-errors -fobject-code -j +RTS -A128m -n2m -RTS'
+export GHC_OPTIONS='-fmax-relevant-binds=3 -fdiagnostics-color=always -fprint-expanded-synonyms -freverse-errors -fobject-code -j4 +RTS -A128m -n2m -RTS'
 
 precmd() {
   RPROMPT=""
@@ -97,3 +95,5 @@ if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ubuntu/.n
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -f "/home/ubuntu/.ghcup/env" ] && source "/home/ubuntu/.ghcup/env" # ghcup-env
+if [ -e /home/ben/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ben/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+eval "$(direnv hook zsh)" # Hook direnv into directory

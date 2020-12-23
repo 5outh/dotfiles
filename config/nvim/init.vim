@@ -6,6 +6,7 @@ function! DoRemote(arg)
 endfunction
 
 call plug#begin()
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-rhubarb' " Needed for :Gbrowse
@@ -16,6 +17,7 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'scrooloose/nerdcommenter'
+Plug 'skywind3000/vim-preview'
 Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'pangloss/vim-javascript'
 Plug 'neovimhaskell/haskell-vim'
@@ -49,15 +51,9 @@ let g:ale_linters['jsx'] = ['prettier', 'eslint']
 let g:ale_linters['haskell'] = ['hlint']
 
 let g:ale_fixers = {}
-let g:ale_fixers['haskell'] = ['brittany', 'hlint', 'stylish-haskell']
+let g:ale_fixers['haskell'] = ['ormolu', 'hlint', 'stylish-haskell']
 let g:ale_fixers['javascript'] = ['prettier', 'eslint']
 let g:ale_fixers['json'] = ['prettier']
-
-" Use stack to execute haskell linters and fixers
-let g:ale_haskell_hlint_executable='stack'
-let g:ale_haskell_brittany_executable='stack'
-let g:ale_haskell_stylish_haskell_executable='stack'
-let g:ale_haskell_stack_build_options="--test --fast --file-watch --pedantic --interleaved-output --ghc-options=$GHC_OPTIONS"
 
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_eslint_use_local_config = 1
@@ -84,7 +80,7 @@ let g:haskell_enable_quantification = 1
 "Color Scheme etc
 
 set termguicolors
-let ayucolor="dark"
+let ayucolor="mirage"
 colorscheme ayu
 set t_Co=256
 
@@ -155,7 +151,7 @@ set scrolloff=5
 set nofoldenable
 
 " markdown languages
-let g:markdown_fenced_languages = ['java', 'haskell', 'javascript', 'ruby', 'c', 'cpp', 'php', 'sh', 'sql']
+let g:markdown_fenced_languages = ['java', 'haskell', 'javascript', 'ruby', 'c', 'cpp', 'php', 'sh', 'sql', 'xml']
 
 " incsearch.vim
 map / <Plug>(incsearch-forward)
@@ -230,3 +226,8 @@ nmap <Leader>gR :Git fetch main<CR>:Git rebase main<CR>
 
 " Allow comments in json
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" Keep tags up to date
+augroup tags
+  autocmd BufWritePost *.hs :Dispatch! fast-tags %
+augroup END
