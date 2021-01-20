@@ -9,6 +9,8 @@ call plug#begin()
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
+Plug 'leafgarland/typescript-vim'
+Plug 'LnL7/vim-nix'
 Plug 'tpope/vim-rhubarb' " Needed for :Gbrowse
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-projectionist'
@@ -42,7 +44,7 @@ set list
 
 let g:fzf_layout = { 'window': '-tabnew' }
 
-let g:deoplete#enable_at_startup = 0
+let g:deoplete#enable_at_startup = 1
 let g:UltiSnipsSnippetDirectories=["usnippets"]
 
 let g:ale_linters = {}
@@ -51,9 +53,11 @@ let g:ale_linters['jsx'] = ['prettier', 'eslint']
 let g:ale_linters['haskell'] = ['hlint']
 
 let g:ale_fixers = {}
-let g:ale_fixers['haskell'] = ['ormolu', 'hlint', 'stylish-haskell']
-let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+let g:ale_fixers['haskell'] = ['ormolu', 'stylish-haskell']
+let g:ale_fixers['javascript'] = ['ormolu', 'prettier', 'eslint']
 let g:ale_fixers['json'] = ['prettier']
+
+let g:ale_haskell_ormolu_options="-o '-XTypeApplications' -o '-XPatternSynonyms'"
 
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_javascript_eslint_use_local_config = 1
@@ -150,6 +154,9 @@ au TermOpen * setlocal nonumber norelativenumber
 set scrolloff=5
 set nofoldenable
 
+" UltiSnips
+let g:UltiSnipsExpandTrigger='<C-j>'
+
 " markdown languages
 let g:markdown_fenced_languages = ['java', 'haskell', 'javascript', 'ruby', 'c', 'cpp', 'php', 'sh', 'sql', 'xml']
 
@@ -221,13 +228,10 @@ nmap <Leader>gP :Git push origin HEAD --force<CR>
 " Browse modified git files
 nmap <Leader>gf :GitFiles -m<CR>
 
-" Refresh current branch from 'main'
-nmap <Leader>gR :Git fetch main<CR>:Git rebase main<CR>
-
 " Allow comments in json
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Keep tags up to date
-augroup tags
+augroup haskell 
   autocmd BufWritePost *.hs :Dispatch! fast-tags %
 augroup END
