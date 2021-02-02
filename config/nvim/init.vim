@@ -186,6 +186,7 @@ nnoremap <C-j> :PreviewTag<CR>
 nnoremap <C-k> :PreviewClose<CR>
 
 set ruler
+set noshowcmd " Turn off command display in bottom right
 
 " Map jk to esc (chord)
 call arpeggio#map('i', '', 0, 'jk', '<Esc>')
@@ -230,6 +231,11 @@ nmap <Leader>gf :GitFiles -m<CR>
 
 " Allow comments in json
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" Use system clipboard in wayland
+xnoremap "+y y:call system("wl-copy", @")<cr>
+nnoremap "+p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
+nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
 
 " Keep tags up to date
 augroup haskell 

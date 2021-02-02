@@ -4,6 +4,16 @@ calc() {
   echo "scale=3; $1" | bc
 }
 
+# replace $1 with $2 in a git repository
+git-replace() {
+  grep -rl "$1" /dir_to_search_under | xargs sed -i "s/$1/$2/g"
+}
+
+# replace $1 with $2 in a git repository (words)
+git-replace-word() {
+  grep -rlw "$1" /dir_to_search_under | xargs sed -i "s/$1/$2/g"
+}
+
 # Haskell
 
 stack-test() {
@@ -36,14 +46,16 @@ one-password-login () {
 # Mercury
 
 mwb-start () {
+  # Exit nix first if already in nix shell
+  if [[ $IN_NIX_SHELL ]]; then; exit; fi
   cd $MERCURY_HOME/mwb
   nix-shell --command zsh
 }
 
-make-build-watch () {
+mwb-build-watch () {
   ls -d **/*.hs | entr -rc make build
 }
 
-make-test-watch () {
+mwb-test-watch () {
   ls -d **/*.hs | entr -rc make test match="$1"
 }

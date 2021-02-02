@@ -99,7 +99,6 @@ bindswitch lid:off output $laptop_output enable
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
-    bindsym $mod+Tab focus right
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -161,13 +160,17 @@ bindswitch lid:off output $laptop_output enable
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+t floating toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
 
     # Toggle between layouts
     bindsym $mod+space layout toggle all
+
+    # Don't change focus when moving mouse around (click still changes focus)
+    focus_follows_mouse no
+
 #
 # Scratchpad:
 #
@@ -225,19 +228,23 @@ bar {
     font Iosevka Fixed Curly 10
 }
 
-default_border pixel 4
-
 #
 # UI
 # 
 
 font Iosevka Fixed Curly
+default_border pixel 4
+gaps outer 4
+smart_gaps on
 
 #
 # Custom commands
 #
 
 # Screenshot a screen region
-bindsym $mod+i grim -g  "$(slurp)"
+bindsym $mod+Shift+i exec grim -g  "$(slurp)"
+
+# Start mako
+exec mako --default-timeout 3000 --width=1000
 
 include @sysconfdir@/sway/config.d/*
