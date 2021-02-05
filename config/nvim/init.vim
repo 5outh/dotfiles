@@ -24,10 +24,9 @@ Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'pangloss/vim-javascript'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'mxw/vim-jsx'
-Plug 'mileszs/ack.vim'
 Plug 'kana/vim-arpeggio'
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'haya14busa/incsearch.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'dense-analysis/ale'
@@ -236,6 +235,12 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 xnoremap "+y y:call system("wl-copy", @")<cr>
 nnoremap "+p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
 nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
+
+let g:fzf_tags_command = 'fast-tags -R'
+
+" Go to persistent model
+command! -bang Model call fzf#vim#ag(expand("<cWORD>") . " sql", fzf#vim#with_preview(), <bang>1)
+nnoremap <Leader>m :Model<CR>
 
 " Keep tags up to date
 augroup haskell 

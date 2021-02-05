@@ -46,10 +46,13 @@ one-password-login () {
 # Mercury
 
 mwb-start () {
-  # Exit nix first if already in nix shell
-  if [[ $IN_NIX_SHELL ]]; then; exit; fi
   cd $MERCURY_HOME/mwb
-  nix-shell --command zsh
+  nix-shell --command "zsh -c \"make tags\"; zsh -i"
+}
+
+mwb-run() {
+  cd $MERCURY_HOME/mwb
+  nix-shell --command "zsh -c \"make tags && make run\"; zsh -i"
 }
 
 mwb-build-watch () {
@@ -57,5 +60,10 @@ mwb-build-watch () {
 }
 
 mwb-test-watch () {
-  ls -d **/*.hs | entr -rc make test match="$1"
+  ls -d **/*.hs | entr -rc make test-fast match="$1"
+}
+
+mwf-run() {
+  cd $MERCURY_HOME/mwf
+  sensible-browser http://localhost:3001 && yarn start
 }

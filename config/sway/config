@@ -7,7 +7,7 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
+set $mod Mod4
 
 # Home row direction keys, like vim
 set $left h
@@ -74,7 +74,7 @@ bindswitch lid:off output $laptop_output enable
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+p exec $menu
@@ -148,13 +148,8 @@ bindswitch lid:off output $laptop_output enable
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    bindsym $mod+s splith
     bindsym $mod+v splitv
-
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -233,9 +228,8 @@ bar {
 # 
 
 font Iosevka Fixed Curly
-default_border pixel 4
-gaps outer 4
-smart_gaps on
+default_border pixel 2
+gaps outer 2
 
 #
 # Custom commands
