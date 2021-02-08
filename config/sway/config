@@ -239,6 +239,6 @@ gaps outer 2
 bindsym $mod+Shift+i exec grim -g  "$(slurp)"
 
 # Start mako
-exec mako --default-timeout 3000 --width=1000
+exec mako
 
 include @sysconfdir@/sway/config.d/*
