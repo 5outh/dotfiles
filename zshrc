@@ -41,9 +41,6 @@ export TERM=xterm-256color
 # Source git aliases again, because the `git` plugin overwrites aliases
 source $HOME/.git-aliases
 
-# Fast GHC Options for Stack
-export GHC_OPTIONS='-fmax-relevant-binds=3 -fdiagnostics-color=always -fprint-expanded-synonyms -freverse-errors -fobject-code -j4 +RTS -A128m -n2m -RTS'
-
 precmd() {
   RPROMPT=""
 }
@@ -104,8 +101,3 @@ else
 fi
 
 eval "$(direnv hook zsh)" # Hook direnv into directory
-
-# Print PR status when in a git directory
-if git rev-parse --git-dir > /dev/null 2>&1; then
-  gh pr status
-fi

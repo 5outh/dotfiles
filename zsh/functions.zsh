@@ -14,30 +14,6 @@ git-replace-word() {
   grep -rlw "$1" /dir_to_search_under | xargs sed -i "s/$1/$2/g"
 }
 
-# Haskell
-
-stack-test() {
-  if [ $# -eq 0 ]; then
-    PGDATABASE=classroom_test \
-      stack test $(basename $(pwd)):spec \
-      --fast \
-      --file-watch \
-      --pedantic \
-      --interleaved-output \
-      --ghc-options="$GHC_OPTIONS"
-  else
-    PGDATABASE=classroom_test \
-      stack test $(basename $(pwd)):spec \
-      --fast \
-      --test-arguments="-m \"$1\"" \
-      --file-watch \
-      --pedantic \
-      --interleaved-output \
-      --ghc-options="$GHC_OPTIONS" \
-      "${@:2}"
-  fi
-}
-
 # 1pass
 one-password-login () {
   eval $(op signin my)

@@ -66,9 +66,6 @@ let g:ale_javascript_eslint_use_local_config = 1
 let g:ale_fix_on_save = 1
 
 let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['stack', 'exec -- ghcide --lsp'],
-    \ }
 
 " Force spaces before comment delimeters
 let g:NERDSpaceDelims = 1
@@ -81,6 +78,8 @@ let g:jsx_ext_required = 0
 " Haskell
 " Enable highlighting of 'forall'
 let g:haskell_enable_quantification = 1
+" Stop annoying autoindent
+let g:haskell_indent_disable = 1
 
 "Color Scheme etc
 
@@ -194,6 +193,7 @@ call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 " <leader>? gets full info about lint errors
 autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursorDetail()<cr>
+
 
 " If you use qualified tags, then you have to change iskeyword to include
 " a dot.  Unfortunately, that affects a lot of other commands, such as
