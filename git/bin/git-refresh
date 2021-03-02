@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+BRANCH=$(git branch --show-current)
+
+git checkout master
+git pull -r origin master
+git checkout "$BRANCH"
+git rebase master
+
+

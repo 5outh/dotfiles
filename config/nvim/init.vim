@@ -11,6 +11,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug 'leafgarland/typescript-vim'
 " Plug 'neovim/nvim-lspconfig'
+Plug 'tomlion/vim-solidity'
 Plug 'LnL7/vim-nix'
 Plug 'tpope/vim-rhubarb' " Needed for :Gbrowse
 Plug 'tpope/vim-repeat'

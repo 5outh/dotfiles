@@ -31,8 +31,20 @@ mwb-run() {
   nix-shell --command "zsh -c \"make tags && make run\"; zsh -i"
 }
 
+mwb-watch () {
+  if [[ "$1" != "build" && "$1" != "test" && "$1" != "run" ]]; then
+    echo "usage: mwb-watch <build|test|run>"
+  fi
+
+  ls -d **/*.hs | entr -rc make $1
+}
+
 mwb-build-watch () {
   ls -d **/*.hs | entr -rc make build
+}
+
+mwb-run-watch () {
+  ls -d **/*.hs | entr -rc make 
 }
 
 mwb-test-watch () {
@@ -42,4 +54,8 @@ mwb-test-watch () {
 mwf-run() {
   cd $MERCURY_HOME/mwf
   sensible-browser http://localhost:3001 && yarn start
+}
+
+function pr () {
+  gh pr view $1 --web
 }
