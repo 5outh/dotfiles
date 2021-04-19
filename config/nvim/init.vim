@@ -6,6 +6,7 @@ function! DoRemote(arg)
 endfunction
 
 call plug#begin()
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
@@ -35,7 +36,7 @@ Plug 'dense-analysis/ale'
 Plug 'ayu-theme/ayu-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'SirVer/ultisnips'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug '5outh/yesod-routes.vim'
 call plug#end()
 
@@ -45,7 +46,7 @@ set list
 
 let g:fzf_layout = { 'window': '-tabnew' }
 
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 let g:UltiSnipsSnippetDirectories=["usnippets"]
 
@@ -70,6 +71,8 @@ let g:LanguageClient_rootMarkers = ['*.cabal', 'stack.yaml']
 
 " Force spaces before comment delimeters
 let g:NERDSpaceDelims = 1
+" Align comments to the left
+let g:NERDDefaultAlign = 'left'
 
 " Javascript
 let g:javascript_plugin_flow = 1
@@ -239,18 +242,49 @@ xnoremap "+y y:call system("wl-copy", @")<cr>
 nnoremap "+p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
 nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
 
-let g:fzf_tags_command = 'fast-tags -R'
+
+" let g:fzf_tags_command = 'fast-tags -R'
 
 " Go to persistent model
 command! -bang Model call fzf#vim#ag(expand("<cWORD>") . " sql", fzf#vim#with_preview(), <bang>1)
 nnoremap <Leader>m :Model<CR>
 
-" Keep tags up to date
 augroup haskell 
-  autocmd BufWritePost *.hs :Dispatch! fast-tags %
+  " use coc as a provider for tags
+  autocmd FileType haskell setlocal tagfunc=CocTagFunc
 augroup END
 
 hi link ALEError Error
 hi Warning term=underline cterm=underline ctermfg=Yellow gui=undercurl guisp=Gold
 hi link ALEWarning Warning
 hi link ALEInfo SpellCap
+
+" QuickFix nav
+map <leader>c :copen<CR>
+map <C-h> :cn<CR>
+map <C-l> :cp<CR>
+
+" Read externally generated quickfix items into a new quickfix window if file exists
+nnoremap <silent> T :cexpr system("cat .quickfix")<CR>
+
+" error format for something like
+" src/Ben/Foo.hs:336:38: error: Variable not in scope: processorId :: Text
+:set efm=%f:%l:%c:\ %m
+
+" Coc.nvim bindings
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+nmap <silent> gd <Plug>(coc-definition)
+nnoremap <silent><nowait> <space>f :<C-u>CocList symbols<cr>

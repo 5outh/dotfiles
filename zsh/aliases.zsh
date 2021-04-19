@@ -1,1 +1,5 @@
-# vi: set noundofile :
+alias gco='git checkout'
+alias gc='git commit --verbose'
+alias gp='git push origin HEAD'
+alias gP='git push origin HEAD --force'
+alias gf='git feature'

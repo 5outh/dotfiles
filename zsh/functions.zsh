@@ -6,12 +6,12 @@ calc() {
 
 # replace $1 with $2 in a git repository
 git-replace() {
-  grep -rl "$1" /dir_to_search_under | xargs sed -i "s/$1/$2/g"
+  git grep -rl "$1" . | xargs sed -i "s/$1/$2/g"
 }
 
 # replace $1 with $2 in a git repository (words)
 git-replace-word() {
-  grep -rlw "$1" /dir_to_search_under | xargs sed -i "s/$1/$2/g"
+  git grep -rlw "$1" . | xargs sed -i "s/$1/$2/g"
 }
 
 # 1pass
@@ -39,16 +39,20 @@ mwb-watch () {
   ls -d **/*.hs | entr -rc make $1
 }
 
+list-haskell-files() {
+  ls -d **/*.(hs|persistentmodels|yesodroutes)
+}
+
 mwb-build-watch () {
-  ls -d **/*.hs | entr -rc make build
+  list-haskell-files | entr -rc make build
 }
 
 mwb-run-watch () {
-  ls -d **/*.hs | entr -rc make 
+  list-haskell-files | entr -rc make run
 }
 
 mwb-test-watch () {
-  ls -d **/*.hs | entr -rc make test-fast match="$1"
+  list-haskell-files | entr -rc make test-fast match="$1"
 }
 
 mwf-run() {

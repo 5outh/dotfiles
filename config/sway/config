@@ -77,7 +77,7 @@ bindswitch lid:off output $laptop_output enable
     bindsym $mod+q kill
 
     # Start your launcher
-    bindsym $mod+p exec $menu
+    bindsym $mod+space exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -161,7 +161,7 @@ bindswitch lid:off output $laptop_output enable
     bindsym $mod+a focus parent
 
     # Toggle between layouts
-    bindsym $mod+space layout toggle all
+    bindsym $mod+c layout toggle all
 
     # Don't change focus when moving mouse around (click still changes focus)
     focus_follows_mouse no
@@ -240,5 +240,8 @@ bindsym $mod+Shift+i exec grim -g  "$(slurp)"
 
 # Start mako
 exec mako
+
+# See <https://github.com/swaywm/sway/issues/5732>
+exec systemctl --user import-environment
 
 include @sysconfdir@/sway/config.d/*
