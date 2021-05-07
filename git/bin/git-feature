@@ -1,3 +1,14 @@
 #! /bin/zsh
 
-git checkout -b "ben/$1"
+branch="$1"
+
+if [[ $# == 0 ]]; then
+  branch=$(git branch --list "ben/*" --sort=-authordate --format="%(refname:lstrip=-1)" | fzf --preview "git show ben/{} | batcat --color=always --style=numbers")
+fi
+
+if $(git show-ref --verify --quiet refs/heads/ben/$branch); then
+  git checkout "ben/$branch"
+else;
+  echo "Creating new branch ben/$branch"
+  git checkout -b "ben/$branch"
+fi
