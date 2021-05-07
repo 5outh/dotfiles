@@ -6,6 +6,11 @@ if [[ $# == 0 ]]; then
   branch=$(git branch --list "ben/*" --sort=-authordate --format="%(refname:lstrip=-1)" | fzf --preview "git show ben/{} | batcat --color=always --style=numbers")
 fi
 
+if [[ "$branch" == "" ]]; then
+  echo "no branch chosen, exiting"
+  exit 0
+fi
+
 if $(git show-ref --verify --quiet refs/heads/ben/$branch); then
   git checkout "ben/$branch"
 else;
