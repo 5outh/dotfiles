@@ -38,6 +38,9 @@ export TERM=xterm-256color
 
 # User configuration
 
+# User variables
+export MERCURY_HOME="/home/ben/projects/mercury"
+
 # Source git aliases again, because the `git` plugin overwrites aliases
 source $HOME/.git-aliases
 
@@ -60,7 +63,6 @@ zle -N zle-keymap-select
 zle -N zle-line-init
 
 autoload -U +X bashcompinit && bashcompinit
-eval "$(stack --bash-completion-script "$(which stack)")"
 
 export EDITOR='nvim'
 
@@ -73,9 +75,6 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 MEGAREPO_ROOT="/home/ubuntu/code/fr/megarepo/"
-
-# Use 'hub' alias for 'git'
-eval "$(hub alias -s)"
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -99,5 +98,9 @@ then
 else
   [ -f "/home/ben/.ghcup/env" ] && source "/home/ben/.ghcup/env"
 fi
+
+# fzf shell CTRL+R + fuzzy autocomplete
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
 eval "$(direnv hook zsh)" # Hook direnv into directory

@@ -22,12 +22,12 @@ one-password-login () {
 # Mercury
 
 mwb-start () {
-  cd $MERCURY_HOME/mwb
+  cd $MERCURY_HOME/mercury-web-backend
   nix-shell --command "zsh -c \"make tags\"; zsh -i"
 }
 
 mwb-run() {
-  cd $MERCURY_HOME/mwb
+  cd $MERCURY_HOME/mercury-web-backend
   nix-shell --command "zsh -c \"make tags && make run\"; zsh -i"
 }
 
